@@ -14,7 +14,6 @@ if [ "$1" != "" ]; then
       --learning_rate 2e-5 \
       --max_steps 50000 \
       --save_step 10000 \
-      --cache_dir /data/rsg/nlp/tals/.cache/torch/ \
       --overwrite_cache \
       --output_dir results/vitc \
       --test_file $1
@@ -30,9 +29,9 @@ else
       --learning_rate 2e-5 \
       --max_steps 50000 \
       --save_step 10000 \
-      --cache_dir /data/rsg/nlp/tals/.cache/torch/ \
       --overwrite_cache \
-      --output_dir results/vitc
+      --output_dir results/vitc \
+      --test_tasks vitaminc_real vitaminc_synthetic
 fi
 
   #--fp16 \
@@ -43,4 +42,3 @@ fi
   #--model_name_or_path albert-base-v2 \
   #--do_eval \
   #--eval_all_checkpoints \
-  #--test_tasks vitaminc fever fever_adversarial fever_symmetric \

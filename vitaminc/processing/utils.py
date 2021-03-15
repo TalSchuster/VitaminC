@@ -8,7 +8,9 @@ logger = logging.getLogger(__name__)
 
 
 TASK2PATH = {
-    "vitaminc" : "https://www.dropbox.com/s/ivxojzw37ob4nee/vitaminc.zip?dl=1"
+    "vitaminc" : "https://www.dropbox.com/s/ivxojzw37ob4nee/vitaminc.zip?dl=1",
+    "vitaminc_real" : "https://www.dropbox.com/s/y74sez0qa8z5dnw/vitaminc_real.zip?dl=1",
+    "vitaminc_synthetic" : "https://www.dropbox.com/s/uqb2316chhtx77z/vitaminc_synthetic.zip?dl=1",
 }
 
 
