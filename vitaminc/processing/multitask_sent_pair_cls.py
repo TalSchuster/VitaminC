@@ -147,9 +147,10 @@ class VitCDataTrainingArguments:
     """
 
     data_dir: str = field(
-        metadata={"help": "The input data dir. Should contain the .jsonl files."}
+        metadata={"help": "The input data dir. Should contain subfolders with task names that have jsonlines files."
+                          "Cached data files will be saved there (unless --cache_dir is used)."}
     )
-    tasks_names: List[str] = field(metadata={"help": "The names of the tasks to train on."})
+    tasks_names: List[str] = field(default=None, metadata={"help": "The names of the tasks to train on."})
     test_tasks: List[str] = field(
         default=None,
         metadata={"help": "The names of the tasks to test on. "
@@ -174,10 +175,10 @@ class VitCDataTrainingArguments:
         },
     )
     overwrite_cache: bool = field(
-        default=False, metadata={"help": "Overwrite the cached training and evaluation sets"}
+        default=False, metadata={"help": "Overwrite the cached data files."}
     )
     claim_only: bool = field(
-        default=False, metadata={"help": "Use only claim"}
+        default=False, metadata={"help": "Use only the claim sentence from the data"}
     )
     train_file: Optional[str] = field(
         default=None, metadata={"help": "A jsonlines file containing the training data (overrides data_dir)."}
@@ -196,11 +197,18 @@ class VitCDataTrainingArguments:
             else:
                 self.tasks_ratios = [1 / len(self.tasks_names)] * len(self.tasks_names)
 
+            assert sum([r for r in self.tasks_ratios if r != -1]) == 1
+            assert len(self.tasks_ratios) == len(self.tasks_names)
+        else:
+            self.tasks_names = []
+
         if self.test_tasks is None and self.test_file is None:
             # If test_tasks are not declared, use tasks_names
             self.test_tasks = self.tasks_names
-        assert sum([r for r in self.tasks_ratios if r != -1]) == 1
-        assert len(self.tasks_ratios) == len(self.tasks_names)
+
+        if self.data_dir is None:
+            self.data_dir = './data'
+        os.makedirs(self.data_dir, exist_ok=True)
 
 
 class Split(Enum):
