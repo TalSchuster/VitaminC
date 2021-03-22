@@ -17,7 +17,7 @@ from transformers import (
 )
 
 from vitaminc.processing.multitask_sent_pair_cls import (
-    VitCProcessor,
+    VitCFactVerificationProcessor,
     VitCDataTrainingArguments,
     VitCDataset,
     )
@@ -106,7 +106,7 @@ def main():
     # Set seed
     set_seed(training_args.seed)
 
-    num_labels = len(VitCProcessor().get_labels())
+    num_labels = len(VitCFactVerificationProcessor().get_labels())
 
     config = AutoConfig.from_pretrained(
         model_args.config_name if model_args.config_name else model_args.model_name_or_path,

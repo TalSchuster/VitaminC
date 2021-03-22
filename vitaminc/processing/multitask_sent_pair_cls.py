@@ -5,7 +5,6 @@ Used for Multi-task fact verification and NLI.
 """
 
 import os
-import jsonlines
 import logging
 import time
 import random
@@ -19,92 +18,18 @@ from torch.utils.data.dataset import Dataset
 
 from filelock import FileLock
 
-from transformers import (DataProcessor, InputExample, PreTrainedTokenizerBase,
-                          PreTrainedTokenizer, InputFeatures)
+from transformers import InputExample, PreTrainedTokenizerBase, InputFeatures
 
-from vitaminc.processing.utils import download_and_extract
+from vitaminc.processing.utils import download_and_extract, convert_examples_to_features
+from vitaminc.processing.processor import VitCProcessor
 
 
 logger = logging.getLogger(__name__)
 
 
-def convert_examples_to_features(
-    examples: List[InputExample],
-    tokenizer: PreTrainedTokenizer,
-    max_length: Optional[int] = None,
-    label_list=None,
-    output_mode=None,
-):
-    if max_length is None:
-        max_length = tokenizer.max_len
-
-    label_map = {label: i for i, label in enumerate(label_list)}
-
-    def label_from_example(example: InputExample) -> Union[int, float, None]:
-        if example.label is None:
-            return None
-        if output_mode == "classification":
-            return label_map[example.label]
-        elif output_mode == "regression":
-            return float(example.label)
-        raise KeyError(output_mode)
-
-    labels = [label_from_example(example) for example in examples]
-
-    batch_encoding = tokenizer(
-        [(example.text_a, example.text_b) for example in examples],
-        max_length=max_length,
-        padding="max_length",
-        truncation=True,
-    )
-
-    features = []
-    for i in range(len(examples)):
-        inputs = {k: batch_encoding[k][i] for k in batch_encoding}
-
-        feature = InputFeatures(**inputs, label=labels[i])
-        features.append(feature)
-
-    for i, example in enumerate(examples[:5]):
-        logger.info("*** Example ***")
-        logger.info("guid: %s" % (example.guid))
-        logger.info("features: %s" % features[i])
-
-    return features
-
-
-def _read_jsonlines(input_file):
-    lines = []
-    with open(input_file, "r", encoding='utf-8') as f:
-        reader = jsonlines.Reader(f)
-        for line in reader.iter(type=dict):
-            lines.append(line)
-
-    return lines
-
-
-class VitCProcessor(DataProcessor):
+class VitCFactVerificationProcessor(VitCProcessor):
     def __init__(self, claim_only=False):
         self.claim_only = claim_only
-
-    def get_examples_from_file(self, file_path, set_type="train"):
-        return self._create_examples(
-            _read_jsonlines(file_path), set_type)
-
-    def get_train_examples(self, data_dir):
-        """See base class."""
-        return self.get_examples_from_file(
-            os.path.join(data_dir, "train.jsonl"), "train")
-
-    def get_dev_examples(self, data_dir):
-        """See base class."""
-        return self.get_examples_from_file(
-            os.path.join(data_dir, "dev.jsonl"), "dev")
-
-    def get_test_examples(self, data_dir):
-        """See base class."""
-        return self.get_examples_from_file(
-            os.path.join(data_dir, "test.jsonl"), "test")
 
     def get_labels(self):
         """See base class."""
@@ -235,7 +160,7 @@ class VitCDataset(Dataset):
         from args.tasks_names if file_path is not given.
         """
         self.args = args
-        self.processor = VitCProcessor(claim_only=args.claim_only)
+        self.processor = VitCFactVerificationProcessor(claim_only=args.claim_only)
         self.output_mode = "classification"
         if isinstance(mode, str):
             try:

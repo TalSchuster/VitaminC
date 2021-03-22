@@ -4,7 +4,7 @@ set -ex
 
 if [ "$1" != "" ]; then
     python scripts/fact_verification.py \
-      --model_name_or_path tals/albert-base-vitaminc \
+      --model_name_or_path tals/albert-base-vitaminc-fever \
       --tasks_names vitaminc \
       --data_dir data \
       --do_test \
@@ -15,11 +15,11 @@ if [ "$1" != "" ]; then
       --max_steps 50000 \
       --save_step 10000 \
       --overwrite_cache \
-      --output_dir results/vitc \
+      --output_dir results/vitaminc_albert_base \
       --test_file $1
 else
     python scripts/fact_verification.py \
-      --model_name_or_path tals/albert-base-vitaminc \
+      --model_name_or_path tals/albert-base-vitaminc-fever \
       --tasks_names vitaminc \
       --data_dir data \
       --do_test \
@@ -30,7 +30,7 @@ else
       --max_steps 50000 \
       --save_step 10000 \
       --overwrite_cache \
-      --output_dir results/vitc \
+      --output_dir results/vitaminc_albert_base \
       --test_tasks vitaminc_real vitaminc_synthetic
 fi
 
