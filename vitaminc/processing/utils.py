@@ -11,10 +11,10 @@ logger = logging.getLogger(__name__)
 
 
 TASK2PATH = {
-    "vitaminc" : "https://www.dropbox.com/s/ivxojzw37ob4nee/vitaminc.zip?dl=1",
-    "vitaminc_real" : "https://www.dropbox.com/s/y74sez0qa8z5dnw/vitaminc_real.zip?dl=1",
-    "vitaminc_synthetic" : "https://www.dropbox.com/s/uqb2316chhtx77z/vitaminc_synthetic.zip?dl=1",
-    "vitaminc_flagging": "https://www.dropbox.com/s/xcwiy8vg04xvbtb/vitaminc_flagging.zip?dl=1",
+    "vitaminc": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc.zip",
+    "vitaminc_real": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_real.zip",
+    "vitaminc_synthetic": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_synthetic.zip",
+    "vitaminc_flagging": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_flagging.zip",
 }
 
 
@@ -42,11 +42,11 @@ def read_jsonlines(input_file):
 
 
 def convert_examples_to_features(
-    examples: List[InputExample],
-    tokenizer: PreTrainedTokenizer,
-    max_length: Optional[int] = None,
-    label_list=None,
-    output_mode=None,
+        examples: List[InputExample],
+        tokenizer: PreTrainedTokenizer,
+        max_length: Optional[int] = None,
+        label_list=None,
+        output_mode=None,
 ):
     if max_length is None:
         max_length = tokenizer.max_len

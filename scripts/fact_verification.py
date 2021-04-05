@@ -276,11 +276,15 @@ def main():
                             writer.write("%s = %s\n" % (key, value))
 
                 if training_args.do_predict:
+                    if data_args.test_file is not None:
+                        examples = test_dataset.processor.get_examples_from_file(data_args.test_file, "test")
+                    task_data_dir = os.path.join(data_args.data_dir, test_dataset.args.tasks_names[0])
+                    examples = test_dataset.processor.get_test_examples(task_data_dir)
                     with open(output_pred_file, "w") as writer:
-                        writer.write("index\tprediction\n")
+                        writer.write("index\t|\tclaim\t|\tevidence\t|\tprediction\n")
                         for index, item in enumerate(pred_labels):
                             item = test_dataset.get_labels()[item]
-                            writer.write("%d\t%s\n" % (index, item))
+                            writer.write("%d\t|\t%s\t|\t%s\t|\t%s\n" % (index, examples[index].text_b, examples[index].text_a, item))
 
                     with open(output_scores_file, "w") as writer:
                         writer.write("index\t%s\n" % "\t".join(test_dataset.get_labels()))
