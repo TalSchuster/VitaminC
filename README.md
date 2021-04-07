@@ -21,7 +21,7 @@ Note: python>=3.7 is needed for all the dependencies to work.
 
 ---
 # Revision Flagging
-VitaminC revision flagging data (the script below will automatically download it): [link](https://www.dropbox.com/s/xcwiy8vg04xvbtb/vitaminc_flagging.zip?dl=0)
+VitaminC revision flagging data (the script below will automatically download it): [link](https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_flagging.zip)
 
 Example of evaluating ALBERT-base model on the test dataset:
 ```
@@ -34,7 +34,7 @@ The BOW and edit distance baselines from the paper are in `scripts/factual_flagg
 
 # Fact Verification
 
-VitaminC fact verification data (the script below will automatically download it): [link](https://www.dropbox.com/s/ivxojzw37ob4nee/vitaminc.zip?dl=0)
+VitaminC fact verification data (the script below will automatically download the required files): [link](https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc.zip)
 
 Example of evaluating ALBERT-base model fine-tuned with VitaminC and FEVER datasets on the "real" and "synthetic" test sets of VitaminC:
 ```
