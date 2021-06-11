@@ -116,11 +116,17 @@ sh scripts/run_rationale.sh
 If you find our code and/or data useful, please cite our paper:
 
 ```
-@InProceedings{Schuster2019,
-    title = "Get Your Vitamin C! Robust Fact Verification with Contrastive Evidence",
-    author="Tal Schuster and Adam Fisch and Regina Barzilay",
-    booktitle = "NAACL 2021",
+@inproceedings{schuster-etal-2021-get,
+    title = "Get Your Vitamin {C}! Robust Fact Verification with Contrastive Evidence",
+    author = "Schuster, Tal  and
+      Fisch, Adam  and
+      Barzilay, Regina",
+    booktitle = "Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    month = jun,
     year = "2021",
-    url = "https://arxiv.org/abs/2103.08541",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2021.naacl-main.52",
+    pages = "624--643"
 }
 ```
