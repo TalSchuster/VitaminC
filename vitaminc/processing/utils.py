@@ -15,6 +15,7 @@ TASK2PATH = {
     "vitaminc_real": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_real.zip",
     "vitaminc_synthetic": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_synthetic.zip",
     "vitaminc_flagging": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_flagging.zip",
+    "vitaminc_rationale": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_rationale.zip",
 
     "fever": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_baselines/fever.zip",
     "mnli": "https://github.com/TalSchuster/talschuster.github.io/raw/master/static/vitaminc_baselines/mnli.zip",

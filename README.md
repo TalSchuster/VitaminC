@@ -42,7 +42,7 @@ sh scripts/run_fact_verification.sh
 ```
 To evaluate the same model on another jsonlines file (containing `claim`, `evidence`, and `label` fields). Use:
 ```
-sh scripts/run_fact_verification.sh path_to_test_file
+sh scripts/run_fact_verification.sh --test_file path_to_test_file
 ```
 
 Other available pretrained models (including the ALBERT-xlarge model that performed the best):
@@ -58,7 +58,10 @@ tals/albert-xlarge-vitaminc-fever
 ---
 # Word-level Rationales
 
-*Will be added soon*
+Example of evaluating our distantly supervised ALBERT-base word-level rationale model:
+```
+sh scripts/run_rationale.sh
+```
 
 ---
 
