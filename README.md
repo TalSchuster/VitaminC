@@ -1,4 +1,8 @@
 # VitaminC
+
+<p>
+<a href="https://console.tiyaro.ai/explore/tals-albert-xlarge-vitaminc-mnli"> <img src="https://tiyaro-public-docs.s3.us-west-2.amazonaws.com/assets/try_on_tiyaro_badge.svg"></a>
+</p>
 This repository contains the dataset and models for the NAACL 2021 paper: [Get Your Vitamin C! Robust Fact Verification with Contrastive Evidence](https://arxiv.org/abs/2103.08541). The VitaminC dataset contains more than 450,000 claim-evidence pairs from over 100,000 revisions to popular Wikipedia pages, and additional "synthetic" revisions.
 
 *We're still updating this repo. More to come soon. Please reach out to us if you have any questions.*
